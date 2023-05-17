@@ -10,8 +10,7 @@ def load_csv():
     csv = pd.read_csv('EDA_Gold_Silver_prices.csv')
     return csv
 
-@st.cache_data(experimental_allow_widgets=True)
-def default_dataframes():
+def app():
     st.title('**Problem 1 - Gold & Silver Exploratory Data Analysis**', anchor=False)
     gold_silver_data = load_csv()
     profile_report = yp.ProfileReport(gold_silver_data, explorative=True)
@@ -19,9 +18,6 @@ def default_dataframes():
     st.dataframe(gold_silver_data)
     st.divider()
     st_profile_report(profile_report)
-
-def app():
-    default_dataframes()
 
 if __name__ == '__main__':
     app()
