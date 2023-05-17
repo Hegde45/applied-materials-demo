@@ -4,7 +4,7 @@ import plotly.express as px
 
 st.set_page_config(layout="wide", page_title='Problem 5')
 
-@st.cache_data
+@st.cache_data(experimental_allow_widgets=True)
 def load_csv():
     csv = pd.read_csv("covid_tracking.csv")
     return csv
@@ -13,7 +13,8 @@ def load_csv():
 if 'covid_data' not in st.session_state:
     st.session_state['covid_data'] = st.session_state['covid_data_backup'] = pd.DataFrame(load_csv())
 
-def app():
+@st.cache_data(experimental_allow_widgets=True)
+def default_dataframes():
     st.title('''**Problem 5 - Covid Tracking Time Series Analysis**''', anchor=False)
     st.header('Dataframe', anchor=False)
     df = st.session_state['covid_data']
@@ -31,6 +32,9 @@ def app():
         fig = px.line(data, x='Date', y=item, color='state',
                     title=f'{item} by State')
         st.plotly_chart(fig, use_container_width=True)
+
+def app():
+    default_dataframes()
 
 if __name__ == '__main__':
     app()
