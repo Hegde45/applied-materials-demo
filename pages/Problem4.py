@@ -3,6 +3,7 @@ import streamlit as st
 import matplotlib.pyplot as plt
 import plotly.express as px
 import seaborn as sns
+from pandas.plotting import scatter_matrix
 
 st.set_page_config(layout="wide", page_title='Problem 4')
 
@@ -70,6 +71,15 @@ def scatter_plot(selected_features):
         sns.scatterplot(x=feature, y='SalePrice', data=st.session_state['train_data'])
         st.pyplot(plt)
 
+@st.cache_data
+def scatter_matrix_plot(columns, serial_no):
+    name = 'Scatter matrix plot - Category ' + str(serial_no)
+    st.subheader(name, anchor=False)
+    subset_df = st.session_state['train_data'][columns]
+    sns.set(style="ticks")
+    sns.pairplot(subset_df)
+    st.pyplot(plt)
+
 def app():
     
     st.title('''**Problem 4 - Housing Prices Analysis**''', anchor=False)
@@ -102,26 +112,14 @@ def app():
     summary_stats3 = categorical_cols.describe()
     st.dataframe(summary_stats3)
 
-    # group 1 - scatter matrix plot
-    subset_variables_array = [
-        ['MSSubClass','MSZoning','LotFrontage','LotArea','Street','Alley','LotShape','LandContour','Utilities','LotConfig','LandSlope','Neighborhood']
-        ['Condition1','Condition2','BldgType','HouseStyle','OverallQual','OverallCond','YearBuilt','YearRemodAdd']
-        ['RoofStyle','RoofMatl','Exterior1st','Exterior2nd','MasVnrType','MasVnrArea','ExterQual','ExterCond']
-        ['Foundation','BsmtQual','BsmtCond','BsmtExposure','BsmtFinType1','BsmtFinSF1','BsmtFinType2','BsmtFinSF2','BsmtUnfSF','TotalBsmtSF']
-        ['Heating','HeatingQC','CentralAir','Electrical','1stFlrSF','2ndFlrSF','LowQualFinSF','GrLivArea']
-        ['BsmtFullBath','BsmtHalfBath', 'FullBath','HalfBath','BedroomAbvGr']
-        ['KitchenAbvGr','KitchenQual','TotRmsAbvGrd','Functional','Fireplaces','FireplaceQu']
-        ['GarageType','GarageYrBlt','GarageFinish','GarageCars','GarageArea','GarageQual','GarageCond','PavedDrive','WoodDeckSF']
-        ['OpenPorchSF','EnclosedPorch','3SsnPorch','ScreenPorch','PoolArea','PoolQC','Fence','MiscFeature','MiscVal','MoSold','YrSold','SaleType','SaleCondition']
-    ]
-    for index, item in enumerate(subset_variables_array):
-        # Creating the scatter matrix plot
-        name = 'Scatter matrix plot - Category ' + str(index + 1)
-        st.subheader(name, anchor=False)
-        subset_df = st.session_state['train_data'][item]
-        sns.set(style="ticks")
-        sns.pairplot(subset_df)
-        st.pyplot(plt)
+    scatter_matrix_plot(['MSSubClass','MSZoning','LotFrontage','LotArea','Street','Alley','LotShape','LandContour','Utilities','LotConfig','LandSlope','Neighborhood'], 1)
+    scatter_matrix_plot(['Condition1','Condition2','BldgType','HouseStyle','OverallQual','OverallCond','YearBuilt','YearRemodAdd'], 2)
+    scatter_matrix_plot(['RoofStyle','RoofMatl','Exterior1st','Exterior2nd','MasVnrType','MasVnrArea','ExterQual','ExterCond'], 3)
+    scatter_matrix_plot(['Foundation','BsmtQual','BsmtCond','BsmtExposure','BsmtFinType1','BsmtFinSF1','BsmtFinType2','BsmtFinSF2','BsmtUnfSF','TotalBsmtSF'], 4)
+    scatter_matrix_plot(['Heating','HeatingQC','CentralAir','Electrical','1stFlrSF','2ndFlrSF','LowQualFinSF','GrLivArea', 'BsmtFullBath','BsmtHalfBath', 'FullBath','HalfBath','BedroomAbvGr'], 5)
+    scatter_matrix_plot(['KitchenAbvGr','KitchenQual','TotRmsAbvGrd','Functional','Fireplaces','FireplaceQu'], 6)
+    scatter_matrix_plot(['GarageType','GarageYrBlt','GarageFinish','GarageCars','GarageArea','GarageQual','GarageCond','PavedDrive','WoodDeckSF'], 7)
+    scatter_matrix_plot(['OpenPorchSF','EnclosedPorch','3SsnPorch','ScreenPorch','PoolArea','PoolQC','Fence','MiscFeature','MiscVal','MoSold','YrSold','SaleType','SaleCondition'], 8)
 
 if __name__ == '__main__':
     app()

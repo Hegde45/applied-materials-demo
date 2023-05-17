@@ -34,11 +34,9 @@ def app():
         del st.session_state['store_data']['Unnamed: 0']
 
     if 'Units Sold' not in st.session_state['sales_data']:
-        # Convert logmove column to numeric and apply exponential transform
         st.session_state['sales_data']['logmove'] = pd.to_numeric(st.session_state['sales_data']['logmove'])
         st.session_state['sales_data']['Units Sold'] = np.exp(st.session_state['sales_data']['logmove'])
 
-        # Check for outliers
         st.write('units sold describe')
         st.write(st.session_state['sales_data']['Units Sold'].describe())
 
@@ -87,11 +85,13 @@ def app():
     st.pyplot(plt)
 
     # Box plots
-    plt.figure(figsize=(60, 40), dpi=300)
+    plt.figure(figsize=(10, 6), dpi=300)
     sns.boxplot(data=merge_data, x='brand', y='Units Sold')
     plt.xlabel('Brand')
     plt.ylabel('Units Sold')
-    plt.title('Box Plot of Units Sold by Brand')
+    plt.tick_params(axis = 'x', labelsize = 26)
+    plt.tick_params(axis = 'y', labelsize = 26)
+    plt.title('Box Plot of Units Sold by Brand', fontsize = 50)
     st.pyplot(plt)
 
     # Scatter plot

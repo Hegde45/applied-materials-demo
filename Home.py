@@ -10,7 +10,7 @@ def app():
     st.subheader('''**`Python`** **`Streamlit`**''', anchor=False)
 
     st.header('**Libraries**', anchor=False)
-    st.subheader('**`pandas`**\t**`ydata-profiling`**\t**`streamlit-pandas-profiling`**\t**`plotly`**\t**`matplotlib`**\t**`seaborn`**\t', anchor=False)
+    st.subheader('**`numpy`**\t**`pandas`**\t**`matplotlib`**\t**`plotly`**\t**`seaborn`**\t**`ydata-profiling`**\t**`streamlit-pandas-profiling`**\t', anchor=False)
 
     st.header('**By**', anchor=False)
     st.subheader('**[Bharat Hegde](https://www.linkedin.com/in/bharat-hegde-402212200/)**', anchor=False)
