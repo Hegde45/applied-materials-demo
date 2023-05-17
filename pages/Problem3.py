@@ -85,13 +85,13 @@ def app():
     st.pyplot(plt)
 
     # Box plots
-    plt.figure(figsize=(10, 6), dpi=300)
+    plt.figure(figsize=(10, 6))
     sns.boxplot(data=merge_data, x='brand', y='Units Sold')
     plt.xlabel('Brand')
     plt.ylabel('Units Sold')
-    plt.tick_params(axis = 'x', labelsize = 26)
-    plt.tick_params(axis = 'y', labelsize = 26)
-    plt.title('Box Plot of Units Sold by Brand', fontsize = 50)
+    plt.tick_params(axis = 'x', labelsize = 14)
+    plt.tick_params(axis = 'y', labelsize = 14)
+    plt.title('Box Plot of Units Sold by Brand', fontsize = 20)
     st.pyplot(plt)
 
     # Scatter plot
