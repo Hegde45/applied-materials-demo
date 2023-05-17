@@ -15,7 +15,7 @@ def app():
     gold_silver_data = load_csv()
     profile_report = yp.ProfileReport(gold_silver_data, explorative=True)
     st.header('**Dataframe**')
-    st.write(gold_silver_data)
+    st.dataframe(gold_silver_data)
     st_profile_report(profile_report)
 
 if __name__ == '__main__':

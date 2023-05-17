@@ -90,12 +90,17 @@ def app():
     st.subheader('Summary Statistics', anchor=False)
     summary_stats()
 
-    # # heat map
-    st.subheader('All Correlations', anchor=False)
-    heatmap_all_correlations()
-
-    st.subheader('High Correlations', anchor=False)
-    heatmap_high_correlations()
+    # heat map
+    correlation_option_selected = st.radio(
+        "Please select an option for correlations",
+        ('All Correlations',
+        'High Correlations'))
+    if correlation_option_selected == 'All Correlations':
+        st.subheader('All Correlations', anchor=False)
+        heatmap_all_correlations()
+    elif correlation_option_selected == 'High Correlations':
+        st.subheader('High Correlations', anchor=False)
+        heatmap_high_correlations()
         
     # scatter plot
     st.subheader('Scatter plot', anchor=False)
@@ -112,14 +117,42 @@ def app():
     summary_stats3 = categorical_cols.describe()
     st.dataframe(summary_stats3)
 
-    scatter_matrix_plot(['MSSubClass','MSZoning','LotFrontage','LotArea','Street','Alley','LotShape','LandContour','Utilities','LotConfig','LandSlope','Neighborhood'], 1)
-    scatter_matrix_plot(['Condition1','Condition2','BldgType','HouseStyle','OverallQual','OverallCond','YearBuilt','YearRemodAdd'], 2)
-    scatter_matrix_plot(['RoofStyle','RoofMatl','Exterior1st','Exterior2nd','MasVnrType','MasVnrArea','ExterQual','ExterCond'], 3)
-    scatter_matrix_plot(['Foundation','BsmtQual','BsmtCond','BsmtExposure','BsmtFinType1','BsmtFinSF1','BsmtFinType2','BsmtFinSF2','BsmtUnfSF','TotalBsmtSF'], 4)
-    scatter_matrix_plot(['Heating','HeatingQC','CentralAir','Electrical','1stFlrSF','2ndFlrSF','LowQualFinSF','GrLivArea', 'BsmtFullBath','BsmtHalfBath', 'FullBath','HalfBath','BedroomAbvGr'], 5)
-    scatter_matrix_plot(['KitchenAbvGr','KitchenQual','TotRmsAbvGrd','Functional','Fireplaces','FireplaceQu'], 6)
-    scatter_matrix_plot(['GarageType','GarageYrBlt','GarageFinish','GarageCars','GarageArea','GarageQual','GarageCond','PavedDrive','WoodDeckSF'], 7)
-    scatter_matrix_plot(['OpenPorchSF','EnclosedPorch','3SsnPorch','ScreenPorch','PoolArea','PoolQC','Fence','MiscFeature','MiscVal','MoSold','YrSold','SaleType','SaleCondition'], 8)
+    scatter_matrix_plot_option_1 = 'MSSubClass,MSZoning,LotFrontage,LotArea,Street,Alley,LotShape,LandContour,Utilities,LotConfig,LandSlope,Neighborhood'
+    scatter_matrix_plot_option_2 = 'Condition1,Condition2,BldgType,HouseStyle,OverallQual,OverallCond,YearBuilt,YearRemodAdd'
+    scatter_matrix_plot_option_3 = 'RoofStyle,RoofMatl,Exterior1st,Exterior2nd,MasVnrType,MasVnrArea,ExterQual,ExterCond'
+    scatter_matrix_plot_option_4 = 'Foundation,BsmtQual,BsmtCond,BsmtExposure,BsmtFinType1,BsmtFinSF1,BsmtFinType2,BsmtFinSF2,BsmtUnfSF,TotalBsmtSF'
+    scatter_matrix_plot_option_5 = 'Heating,HeatingQC,CentralAir,Electrical,1stFlrSF,2ndFlrSF,LowQualFinSF,GrLivArea, BsmtFullBath,BsmtHalfBath, FullBath,HalfBath,BedroomAbvGr'
+    scatter_matrix_plot_option_6 = 'KitchenAbvGr,KitchenQual,TotRmsAbvGrd,Functional,Fireplaces,FireplaceQu'
+    scatter_matrix_plot_option_7 = 'GarageType,GarageYrBlt,GarageFinish,GarageCars,GarageArea,GarageQual,GarageCond,PavedDrive,WoodDeckSF'
+    scatter_matrix_plot_option_8 = 'OpenPorchSF,EnclosedPorch,3SsnPorch,ScreenPorch,PoolArea,PoolQC,Fence,MiscFeature,MiscVal,MoSold,YrSold,SaleType,SaleCondition'
+
+    scatter_matrix_plot_option_selected = st.radio(
+        "Please select an option for scatter matrix plot",
+        (scatter_matrix_plot_option_1,
+        scatter_matrix_plot_option_2,
+        scatter_matrix_plot_option_3,
+        scatter_matrix_plot_option_4,
+        scatter_matrix_plot_option_5,
+        scatter_matrix_plot_option_6,
+        scatter_matrix_plot_option_7,
+        scatter_matrix_plot_option_8))
+
+    if scatter_matrix_plot_option_selected == scatter_matrix_plot_option_1:
+        scatter_matrix_plot(scatter_matrix_plot_option_1.split(","), 1)
+    elif scatter_matrix_plot_option_selected == scatter_matrix_plot_option_2:
+            scatter_matrix_plot(scatter_matrix_plot_option_2.split(","), 2)
+    elif scatter_matrix_plot_option_selected == scatter_matrix_plot_option_3:
+            scatter_matrix_plot(scatter_matrix_plot_option_3.split(","), 3)
+    elif scatter_matrix_plot_option_selected == scatter_matrix_plot_option_4:
+            scatter_matrix_plot(scatter_matrix_plot_option_4.split(","), 4)
+    elif scatter_matrix_plot_option_selected == scatter_matrix_plot_option_5:
+            scatter_matrix_plot(scatter_matrix_plot_option_5.split(","), 5)
+    elif scatter_matrix_plot_option_selected == scatter_matrix_plot_option_6:
+            scatter_matrix_plot(scatter_matrix_plot_option_6.split(","), 6)
+    elif scatter_matrix_plot_option_selected == scatter_matrix_plot_option_7:
+            scatter_matrix_plot(scatter_matrix_plot_option_7.split(","), 7)
+    elif scatter_matrix_plot_option_selected == scatter_matrix_plot_option_8:
+            scatter_matrix_plot(scatter_matrix_plot_option_8.split(","), 8)
 
 if __name__ == '__main__':
     app()

@@ -37,9 +37,6 @@ def app():
         st.session_state['sales_data']['logmove'] = pd.to_numeric(st.session_state['sales_data']['logmove'])
         st.session_state['sales_data']['Units Sold'] = np.exp(st.session_state['sales_data']['logmove'])
 
-        st.write('units sold describe')
-        st.write(st.session_state['sales_data']['Units Sold'].describe())
-
     st.header("Sales Dataframe", anchor=False)
     st.dataframe(st.session_state['sales_data'], use_container_width=True)
     st.write("To get the number of units sold, an exponential transform has been applied to logmove column and resulting data has been written to **Units Sold** column")
