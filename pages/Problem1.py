@@ -17,6 +17,7 @@ def default_dataframes():
     profile_report = yp.ProfileReport(gold_silver_data, explorative=True)
     st.header('**Dataframe**')
     st.dataframe(gold_silver_data)
+    st.divider()
     st_profile_report(profile_report)
 
 def app():

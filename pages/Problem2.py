@@ -59,6 +59,8 @@ def app():
 
     st.session_state['exp_dataframe'] = st.experimental_data_editor(plotdata, key='exp_change_data', num_rows='dynamic', use_container_width=True)
 
+    st.divider()
+
     col1, col2, col3 = st.columns(3)
 
     with col1:
@@ -75,6 +77,8 @@ def app():
         if st.session_state['format'] == 'wide':
             st.button('Convert Data to Long Format', on_click=long_format_conversion)
     
+    st.divider()
+
     if st.session_state['format'] == 'long':
         dataframe_ts = st.session_state['currencies_data'].copy()
         dataframe_ts['Date'] = pd.to_datetime(dataframe_ts['Date']).dt.strftime('%b %d')

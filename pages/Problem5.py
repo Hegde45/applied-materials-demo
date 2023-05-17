@@ -32,7 +32,7 @@ def default_dataframes():
         fig = px.line(data, x='Date', y=item, color='state',
                     title=f'{item} by State')
         st.plotly_chart(fig, use_container_width=True)
-
+        
 def app():
     default_dataframes()
 
